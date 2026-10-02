@@ -80,7 +80,7 @@
       "initials": "XY",
       "accent": "magenta",
       "role": "forensics / MA + RE / Insanity generator / math guy",
-      "bio": "Give me a suspicious file and I'll probably open it before asking where it came from. I'm into forensics, malware analysis, and reverse engineering—figuring out what happened and what the code is hiding. Outside CTFs, I build web projects, get distracted by maths, and start more side projects than I can finish.",
+      "bio": "Give me a suspicious file and I'll probably open it before asking where it came from. Love forensics, MA, RE, and doing stupidly stupid things. Outside CTFs, I build web projects, get distracted by maths, and start more side projects than I can finish.",
       "skills": ["Forensics", "Malware Analysis", "Reverse Engineering", "Python", "C++", "Web Exploitation", "AI", "Wireshark", "Sentinel Programme"],
       "website": { "label": "lxysg.com", "url": "https://lxysg.com" },
       "github": { "label": "@ahigherdesire", "url": "https://github.com/ahigherdesire" },

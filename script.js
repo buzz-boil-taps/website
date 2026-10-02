@@ -55,10 +55,9 @@ function render(data) {
   $("#member-count").textContent = members.length;
   $("#crew-grid").innerHTML = members
     .map(
-      (m, i) => `
+      (m) => `
       <article class="card reveal" data-accent="${esc(m.accent)}">
         <div class="card-glow"></div>
-        <span class="card-id" aria-hidden="true">OP_${String(i + 1).padStart(2, "0")} // 0x${(0xb7 + i * 0x1f).toString(16).toUpperCase()}</span>
         <div class="card-head">
           <div class="avatar"><span>${esc(m.initials)}</span></div>
           <div>
@@ -105,11 +104,11 @@ function render(data) {
   // connect table
   $("#links-table").insertAdjacentHTML(
     "beforeend",
-    members
+    [...members].reverse()
       .map(
-        (m, i) => `
+        (m) => `
       <div class="lt-row" data-accent="${esc(m.accent)}">
-        <div class="lt-identity"><span class="lt-index">${String(i + 1).padStart(2, "0")}</span><strong class="op">${esc(m.name)}</strong></div>
+        <div class="lt-identity"><strong class="lt-name">${esc(m.name)}</strong></div>
         <div class="lt-links">
           <a href="${esc(safeUrl(m.website?.url))}" target="_blank" rel="noopener"><span>web</span>${esc(m.website?.label)}</a>
           <a href="${esc(safeUrl(m.github?.url))}" target="_blank" rel="noopener"><span>github</span>${esc(m.github?.label)}</a>
@@ -414,7 +413,7 @@ function shell(data) {
             `<span class="${ACCENT_CLASS[m.accent] || "neon-c"}">${esc(m.name.padEnd(nameW))}</span>${esc(m.handle.padEnd(handleW))}${esc(m.role)}`
         )
         .join("\n"),
-    contact: () => members.map((m) => esc(m.email)).join("\n"),
+    contact: () => [...members].reverse().map((m) => esc(m.email)).join("\n"),
     origin: () => team.origin.map(fmt).join("\n"),
     ls: () => "origin_story.txt  mission.txt  members/  achievements.log  flag.txt",
     "cat flag.txt": () => ({ html: "cat: flag.txt: Permission denied", cls: "out err" }),

@@ -794,8 +794,7 @@ a { color: inherit; text-decoration: none; }
   gap: .8rem;
   margin-bottom: .65rem;
 }
-.lt-index { color: var(--dim); font-size: 11px; }
-.lt-row .op { color: var(--accent); font-size: 15px; }
+.lt-row .lt-name { color: var(--accent); font-size: 15px; }
 .lt-links { display: flex; flex-wrap: wrap; gap: .5rem; }
 .lt-links a {
   display: inline-flex;
@@ -1204,7 +1203,6 @@ body.sys-glitch .nav { animation: sysg .18s steps(3) both; }
 .stat-num { font-size: 3rem; }
 
 /* ---------- crew cards ---------- */
-.card { padding-top: 2.6rem; }
 .card::after {
   /* hazard strip along the top edge */
   content: "";
@@ -1215,15 +1213,6 @@ body.sys-glitch .nav { animation: sysg .18s steps(3) both; }
   height: 6px;
   background: repeating-linear-gradient(-45deg, var(--accent) 0 6px, transparent 6px 12px);
   opacity: .85;
-}
-.card-id {
-  position: absolute;
-  top: 14px;
-  right: 1.4rem;
-  font-size: 10px;
-  letter-spacing: .2em;
-  color: var(--accent);
-  opacity: .75;
 }
 .card-name { transition: text-shadow .15s; }
 .card:hover .card-name { text-shadow: -2px 0 var(--magenta), 2px 0 var(--cyan); }
