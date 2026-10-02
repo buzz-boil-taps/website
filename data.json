@@ -77,15 +77,15 @@
     {
       "date": "2026-05",
       "type": "research",
-      "title": "Placeholder Vulnerability Disclosure",
+      "title": "[REDACTED] Vulnerability Disclosure",
       "description": "Responsibly disclosed a bug in an open-source project. Patched upstream."
     },
     {
       "date": "2026-07-10 to 2026-07-19",
       "type": "ctf",
-      "title": "Intermediate Youth Cyber Exploration Programme",
-      "place": "#7",
-      "description": "Top 10 in the student bracket. First blood on a crypto challenge."
+      "title": "Intermediate Youth Cyber Exploration Programme CTF",
+      "place": "#11",
+      "description": "Our first group CTF as well as exposure to a lot of skillsets for cybersecurity(fun fact this is where we got our name!)"
     },
     {
       "date": "2026-07-",
