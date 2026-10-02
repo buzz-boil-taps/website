@@ -75,12 +75,6 @@
       "description": "We disclosed a vulnerability to [REDACTED] via SingCERT. The vendor patched it upstream and are currently working with them for disclosure / recognition. We are the first (at least ONE of the first) to disclose a vulnerability to them via SingCERT."
     },
     {
-      "date": "2026-05",
-      "type": "research",
-      "title": "[REDACTED] Vulnerability Disclosure",
-      "description": "Responsibly disclosed a bug in an open-source project. Patched upstream."
-    },
-    {
       "date": "2026-07-10 to 2026-07-19",
       "type": "ctf",
       "title": "Intermediate Youth Cyber Exploration Programme CTF",
