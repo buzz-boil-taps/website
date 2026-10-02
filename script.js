@@ -9,11 +9,25 @@ const $ = (sel) => document.querySelector(sel);
 const esc = (s = "") =>
   String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
-// escape, then turn *text* into a highlighted span
-const fmt = (s) => esc(s).replace(/\*(.+?)\*/g, '<span class="hl">$1</span>');
-
 // block javascript: and other odd schemes in links from data.json
 const safeUrl = (u = "#") => (/^(https?:|mailto:|#|\/|\.)/i.test(u) ? u : "#");
+
+/* mini markup for text in data.json (always escaped first, so raw HTML never gets through):
+     **bold**      _italic_      *glow*      ~~strike~~
+     `code`        ||redacted|| (hover to reveal)      [label](https://url)            */
+const fmt = (s = "") => {
+  const stash = [];
+  const keep = (html) => `\u0000${stash.push(html) - 1}\u0000`;
+  return esc(s)
+    .replace(/`([^`]+)`/g, (_, c) => keep(`<code class="ic">${c}</code>`))
+    .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (_, t, u) => keep(`<a class="inline-link" href="${safeUrl(u)}" target="_blank" rel="noopener">${t}</a>`))
+    .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+    .replace(/\*(.+?)\*/g, '<span class="hl">$1</span>')
+    .replace(/(^|[\s(])_(.+?)_(?=[\s).,!?:;]|$)/g, "$1<em>$2</em>")
+    .replace(/~~(.+?)~~/g, "<s>$1</s>")
+    .replace(/\|\|(.+?)\|\|/g, '<span class="redact" tabindex="0">$1</span>')
+    .replace(/\u0000(\d+)\u0000/g, (_, i) => stash[i]);
+};
 
 const ACCENT_CLASS = { cyan: "neon-c", magenta: "neon-m", lime: "hl", orange: "neon-o" };
 
@@ -65,7 +79,7 @@ function render(data) {
             <p class="card-handle">${esc(m.handle)}</p>
           </div>
         </div>
-        <p class="card-role"><span class="dim">role:</span> ${esc(m.role)}</p>
+        <p class="card-role"><span class="dim">role:</span> ${fmt(m.role)}</p>
         <p class="card-bio">${fmt(m.bio)}</p>
         <ul class="skills">${m.skills.map((s) => `<li>${esc(s)}</li>`).join("")}</ul>
         <div class="card-links">
@@ -94,7 +108,7 @@ function render(data) {
         <span class="entry-date">${esc(a.date)}</span>
         <div class="entry-body">
           <span class="badge ${esc(a.type)}">${esc(a.type.toUpperCase())}</span>
-          <h3>${esc(a.title)}${a.place ? ` <span class="place ${esc(a.highlight || "")}">${esc(a.place)}</span>` : ""}</h3>
+          <h3>${fmt(a.title)}${a.place ? ` <span class="place ${esc(a.highlight || "")}">${esc(a.place)}</span>` : ""}</h3>
           <p>${fmt(a.description)}</p>
         </div>
       </li>`
@@ -410,7 +424,7 @@ function shell(data) {
       members
         .map(
           (m) =>
-            `<span class="${ACCENT_CLASS[m.accent] || "neon-c"}">${esc(m.name.padEnd(nameW))}</span>${esc(m.handle.padEnd(handleW))}${esc(m.role)}`
+            `<span class="${ACCENT_CLASS[m.accent] || "neon-c"}">${esc(m.name.padEnd(nameW))}</span>${esc(m.handle.padEnd(handleW))}${fmt(m.role)}`
         )
         .join("\n"),
     contact: () => [...members].reverse().map((m) => esc(m.email)).join("\n"),

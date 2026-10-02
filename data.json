@@ -8,14 +8,14 @@
       "we read assembly for fun.",
       "we do random stuff we find interesting."
     ],
-    "description": "Three students. One oddly named team. Security research, CTFs, Hackathons, and whatever we decide to build next.",
+    "description": "**Three students.** One _oddly named_ team. Security research, CTFs, hackathons, and *whatever we decide to build next*.",
     "tags": ["CTF", "HACKATHONS", "VULN RESEARCH", "ENGINEERING"],
     "origin": [
-      "It was our first CTF together. The organizers had a random name generator. They *rolled the dice*.",
-      "Out came *\"Buzz Boil Taps\"*. Completely meaningless and yet apparently this was our amazing branding now."
+      "It was our **first CTF together**. The organizers had a `random_name_generator()`. They *rolled the dice*.",
+      "Out came *\"Buzz Boil Taps\"*. **Completely meaningless**, and yet apparently this was our _amazing branding_ now."
     ],
     "mission": [
-      "We're *three students* from the same school, same class. We procrastinate homework to take apart code. We play CTFs, ship things at hackathons, dig for bugs, and build hardware that sometimes works on the first try (haha, i know, amazing joke there)."
+      "We're *three students* from the **same school, same class**. We procrastinate homework to take apart code. We play **CTFs**, ship things at **hackathons**, dig for **bugs**, and build **hardware** that sometimes works on the first try _(haha, i know, amazing joke there)_."
     ],
     "footer": "hack the planet (legally)"
   },
@@ -56,7 +56,7 @@
       "initials": "DS",
       "accent": "lime",
       "role": "pwn / web exploitation / cloud exploitation / code guy",
-      "bio": "You built it? I *break* it. You fixed it? *\"You sure? :)\"*. Other than that, I love python and can read (a tad bit) of assembly. I also like to build things and love AI stuff.",
+      "bio": "You built it? I *break* it. You fixed it? *\"You sure? :)\"*. Other than that, I love **Python** and can read _(a tad bit)_ of **assembly**. I also like to **build things** and love **AI** stuff.",
       "skills": ["Python", "Assembly", "C", "AI", "Web Exploitation", "Cloud Exploitation", "Wireshark", "Burp Suite", "PCB Design"],
       "website": { "label": "darsh.singhals.org", "url": "https://darsh.singhals.org" },
       "github": { "label": "@darsh-io", "url": "https://github.com/darsh-io" },
@@ -68,7 +68,7 @@
       "initials": "NZX",
       "accent": "cyan",
       "role": "web exploitation / pwn / CAD & PCB / spaghetti breadboard wiring guy",
-      "bio": "You want a PCB? Sure! By tomorrow? You want a case and wired perfboard too? Uhhh bye. I love engineering, coding, IO! and cybersec but i have no time management skills. Please dont AI your PCBs.",
+      "bio": "You want a **PCB**? Sure! _By tomorrow?_ You want a case and wired perfboard too? *Uhhh bye.* I love **engineering**, **coding**, **IO!** and **cybersec** but i have _no_ time management skills. **Please dont AI your PCBs.**",
       "skills": ["C++", "Assembly", "Python", "CAD", "PCB Design", "Web Exploitation", "Pwn"],
       "website": { "label": "zhengxian.org", "url": "https://zhengxian.org/" },
       "github": { "label": "@nzx37", "url": "https://github.com/nzx37" },
@@ -80,7 +80,7 @@
       "initials": "XY",
       "accent": "magenta",
       "role": "forensics / MA + RE / Insanity generator / math guy",
-      "bio": "Give me a suspicious file and I'll probably open it before asking where it came from. Love forensics, MA, RE, and doing stupidly stupid things. Outside CTFs, I build web projects, get distracted by maths, and start more side projects than I can finish.",
+      "bio": "Give me a **suspicious file** and I'll probably open it _before_ asking where it came from. Love **forensics**, **MA**, **RE**, and doing *stupidly stupid things*. Outside CTFs, I build **web projects**, get distracted by **maths**, and start more side projects than I can finish.",
       "skills": ["Forensics", "Malware Analysis", "Reverse Engineering", "Python", "C++", "Web Exploitation", "AI", "Wireshark", "Sentinel Programme"],
       "website": { "label": "lxysg.com", "url": "https://lxysg.com" },
       "github": { "label": "@ahigherdesire", "url": "https://github.com/ahigherdesire" },
@@ -92,17 +92,17 @@
     {
       "date": "2026-09-09",
       "type": "vulnerability disclosure",
-      "title": "First Vulnerability Disclosure to [REDACTED] via SingCERT",
+      "title": "First Vulnerability Disclosure to ||REDACTED|| via SingCERT",
       "place": "First Vulnerability Disclosure",
       "highlight": "gold",
-      "description": "We disclosed our first vulnerability to [REDACTED] via SingCERT! The vendor patched it upstream and we are currently working with them for disclosure / recognition. We are the first (at least ONE of the first) to disclose a vulnerability to them via SingCERT!"
+      "description": "We disclosed our **first vulnerability** to ||REDACTED|| via **SingCERT**! The vendor **patched it upstream** and we are currently working with them for disclosure / recognition. We are *the first* _(at least ONE of the first)_ to disclose a vulnerability to them via SingCERT!"
     },
     {
       "date": "2026-07-10 to 2026-07-19",
       "type": "ctf",
       "title": "Intermediate Youth Cyber Exploration Programme CTF",
       "place": "#11",
-      "description": "Our first group CTF as well as exposure to a lot of skillsets for cybersecurity (fun fact this is where we got our name!)"
+      "description": "Our **first group CTF** as well as exposure to a lot of skillsets for cybersecurity _(fun fact: this is where we got our *name*!)_"
     },
     {
       "date": "2025-11-11 to 2025-11-12",
@@ -110,7 +110,7 @@
       "title": "NUSHHACK 25'",
       "place": "#3",
       "highlight": "bronze",
-      "description": "A really cool 24-hour hackathon! Also our very first time competing as three people on one team (wow we were babies back then)"
+      "description": "A really cool **24-hour hackathon**! Also our *very first time* competing as three people on one team _(wow we were babies back then)_"
     }
   ]
 }
