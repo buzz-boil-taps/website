@@ -81,7 +81,7 @@ function render(data) {
   $("#filters").innerHTML = types
     .map(
       (t, i) =>
-        `<button class="filter${i === 0 ? " active" : ""}" data-filter="${esc(t)}" role="tab" aria-selected="${i === 0}">${esc(t)}</button>`
+        `<button class="filter${i === 0 ? " active" : ""}" data-filter="${esc(t)}" aria-pressed="${i === 0}">${esc(t)}</button>`
     )
     .join("");
 
@@ -105,12 +105,14 @@ function render(data) {
     "beforeend",
     members
       .map(
-        (m) => `
+        (m, i) => `
       <div class="lt-row" data-accent="${esc(m.accent)}">
-        <span class="op">${esc(m.name)}</span>
-        <a href="${esc(safeUrl(m.website?.url))}" target="_blank" rel="noopener">${esc(m.website?.label)}</a>
-        <a href="${esc(safeUrl(m.github?.url))}" target="_blank" rel="noopener">${esc(m.github?.label)}</a>
-        <a href="mailto:${esc(m.email)}">${esc(m.email)}</a>
+        <div class="lt-identity"><span class="lt-index">${String(i + 1).padStart(2, "0")}</span><strong class="op">${esc(m.name)}</strong></div>
+        <div class="lt-links">
+          <a href="${esc(safeUrl(m.website?.url))}" target="_blank" rel="noopener"><span>web</span>${esc(m.website?.label)}</a>
+          <a href="${esc(safeUrl(m.github?.url))}" target="_blank" rel="noopener"><span>github</span>${esc(m.github?.label)}</a>
+          <a href="mailto:${esc(m.email)}"><span>email</span>${esc(m.email)}</a>
+        </div>
       </div>`
       )
       .join("")
@@ -155,14 +157,14 @@ function boot(teamName) {
     clearTimeout(timer);
     el.classList.add("done");
     try { sessionStorage.setItem("bbt-booted", "1"); } catch (e) {}
-    setTimeout(() => el.remove(), 700);
+    setTimeout(() => el.remove(), 450);
     window.removeEventListener("keydown", finish);
     el.removeEventListener("click", finish);
   };
   const next = () => {
-    if (i >= lines.length) { timer = setTimeout(finish, 450); return; }
+    if (i >= lines.length) { timer = setTimeout(finish, 250); return; }
     log.innerHTML += lines[i++] + "\n";
-    timer = setTimeout(next, 120 + Math.random() * 140);
+    timer = setTimeout(next, 80 + Math.random() * 65);
   };
   window.addEventListener("keydown", finish);
   el.addEventListener("click", finish);
@@ -273,6 +275,11 @@ function nav() {
       toggle.setAttribute("aria-expanded", "false");
     })
   );
+  document.addEventListener("keydown", (e) => {
+    if (e.key !== "Escape") return;
+    links.classList.remove("open");
+    toggle.setAttribute("aria-expanded", "false");
+  });
 
   const map = new Map([...links.querySelectorAll("a")].map((a) => [a.getAttribute("href").slice(1), a]));
   const io = new IntersectionObserver((entries) => {
@@ -325,7 +332,7 @@ function filters() {
       const f = btn.dataset.filter;
       buttons.forEach((b) => {
         b.classList.toggle("active", b === btn);
-        b.setAttribute("aria-selected", b === btn);
+        b.setAttribute("aria-pressed", b === btn);
       });
       label.textContent = f;
       entries.forEach((en) => {
@@ -414,6 +421,13 @@ function shell(data) {
     if (e.key === "ArrowUp" && hIdx > 0) { input.value = history[--hIdx]; e.preventDefault(); }
     if (e.key === "ArrowDown") { hIdx = Math.min(hIdx + 1, history.length); input.value = history[hIdx] || ""; }
   });
+
+  document.querySelectorAll("[data-command]").forEach((button) =>
+    button.addEventListener("click", () => {
+      input.value = button.dataset.command;
+      form.requestSubmit();
+    })
+  );
 
   $(".shell").addEventListener("click", () => input.focus());
 }

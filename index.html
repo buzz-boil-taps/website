@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <a class="skip-link" href="#about">Skip to content</a>
 
   <!--
     All content (team info, stats, members, achievements) lives in data.json.
@@ -61,6 +62,8 @@
           <span class="dim">$</span> <span id="typed"></span><span class="cursor">█</span>
         </p>
 
+        <p class="hero-description">Three students. One oddly named team. Security research, CTFs, and whatever we decide to build next.</p>
+
         <div class="hero-tags" id="hero-tags"></div>
 
         <div class="hero-cta">
@@ -105,7 +108,7 @@
       <h2 class="section-title" data-num="03"><span class="neon-c">//</span> achievements</h2>
       <p class="section-sub"><span class="dim">$</span> tail -f achievements.log | grep --filter=<span id="filter-label" class="neon-m">all</span></p>
 
-      <div class="filters" id="filters" role="tablist" aria-label="Filter achievements"></div>
+      <div class="filters" id="filters" role="group" aria-label="Filter achievements"></div>
 
       <ol class="timeline" id="timeline"></ol>
     </section>
@@ -116,11 +119,7 @@
       <p class="section-sub">Find us on the internet. Or type <span class="neon-m">help</span> below.</p>
 
       <div class="connect-grid">
-        <div class="links-table reveal" id="links-table">
-          <div class="lt-row lt-head">
-            <span>operator</span><span>website</span><span>github</span><span>email</span>
-          </div>
-        </div>
+        <div class="links-table reveal" id="links-table" aria-label="Team links"></div>
 
         <!-- Interactive terminal -->
         <div class="term shell reveal">
@@ -130,6 +129,11 @@
           </div>
           <div class="term-body" id="shell-out">
             <p class="out">Welcome to the BBT shell. Type <span class="hl">help</span> to list commands.</p>
+          </div>
+          <div class="shell-shortcuts" aria-label="Try a command">
+            <button type="button" data-command="help">help</button>
+            <button type="button" data-command="members">members</button>
+            <button type="button" data-command="origin">origin</button>
           </div>
           <form class="shell-input" id="shell-form" autocomplete="off">
             <label for="shell-cmd"><span class="neon-c">guest@bbt</span>:<span class="neon-m">~</span>$</label>
