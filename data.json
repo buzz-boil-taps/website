@@ -88,19 +88,19 @@
       "description": "Responsibly disclosed a bug in an open-source project. Patched upstream."
     },
     {
-      "date": "2026-03",
+      "date": "2026-07-10 to 2026-07-19",
       "type": "ctf",
-      "title": "Placeholder Student CTF",
+      "title": "Intermediate Youth Cyber Exploration Programme",
       "place": "#7",
       "description": "Top 10 in the student bracket. First blood on a crypto challenge."
     },
     {
       "date": "2026-07-",
-      "type": "ctf",
-      "title": "Our First CTF",
-      "place": "origin",
-      "highlight": "origin",
-      "description": "Where the random name generator blessed us with \"Buzz Boil Taps\". Everything started here."
+      "type": "hackathon",
+      "title": "NUSHHACK 25'",
+      "place": "#3",
+      "highlight": "First Group Challenge!",
+      "description": "Our very first time competing as a three people on one team(wow we were babies back then)"
     }
   ]
 }
