@@ -40,6 +40,18 @@
       "email": "darsh@singhals.org"
     },
     {
+      "name": "Li Xinyuan",
+      "handle": "@ahigherdesire",
+      "initials": "XY",
+      "accent": "magenta",
+      "role": "forensics / MA + RE / Insanity generator / math guy",
+      "bio": "Give me a suspicious file and I'll probably open it before asking where it came from. I'm into forensics, malware analysis, and reverse engineering—figuring out what happened and what the code is hiding. Outside CTFs, I build web projects, get distracted by maths, and start more side projects than I can finish.",
+      "skills": ["forensics", "Malware Analysis", "Reverse Engineering", "Python", "C++", "Web Exploitation", "AI"],
+      "website": { "label": "lxysg.com", "url": "https://lxysg.com" },
+      "github": { "label": "@ahigherdesire", "url": "https://github.com/ahigherdesire" },
+      "email": "xy@lxysg.com"
+    },
+    {
       "name": "Ng Zheng Xian",
       "handle": "@nzx37",
       "initials": "NZX",
@@ -50,18 +62,6 @@
       "website": { "label": "zhengxian.org/", "url": "https://zhengxian.org/" },
       "github": { "label": "@nzx37", "url": "https://github.com/nzx37" },
       "email": "ng@zhengxian.org"
-    },
-    {
-      "name": "Li Xinyuan",
-      "handle": "@ahigherdesire",
-      "initials": "M3",
-      "accent": "magenta",
-      "role": "forensics / MA + RE / Insanity generator / \"claude help me\"",
-      "bio": "<PLEASE FILL IN BIO HERE>",
-      "skills": ["forensics", "Malware Analysis", "Reverse Engineering", "Python", "C++", "Web Exploitation", "AI"],
-      "website": { "label": "lxysg.com", "url": "https://lxysg.com" },
-      "github": { "label": "@ahigherdesire", "url": "https://github.com/ahigherdesire" },
-      "email": "xy@lxysg.com"
     }
   ],
 

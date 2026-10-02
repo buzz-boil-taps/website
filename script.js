@@ -15,7 +15,7 @@ const fmt = (s) => esc(s).replace(/\*(.+?)\*/g, '<span class="hl">$1</span>');
 // block javascript: and other odd schemes in links from data.json
 const safeUrl = (u = "#") => (/^(https?:|mailto:|#|\/|\.)/i.test(u) ? u : "#");
 
-const ACCENT_CLASS = { cyan: "neon-c", magenta: "neon-m", lime: "hl" };
+const ACCENT_CLASS = { cyan: "neon-c", magenta: "neon-m", lime: "hl", orange: "neon-o" };
 
 /* =========================================================
    RENDER
@@ -196,14 +196,14 @@ function rain() {
       ctx.fillStyle = i % 7 === 0 ? "#ff2bd6" : (Math.random() > 0.975 ? "#ffffff" : "#00f0ff");
       ctx.fillText(ch, i * size, y);
       if (y > h && Math.random() > 0.975) drops[i] = 0;
-      drops[i] += 0.5;
+      drops[i] += 0.34;
     }
   };
 
   if (reduceMotion) { draw(); return; }
   let last = 0;
   const loop = (t) => {
-    if (t - last > 50) { draw(); last = t; }
+    if (!document.hidden && t - last > 33) { draw(); last = t; }
     requestAnimationFrame(loop);
   };
   requestAnimationFrame(loop);
@@ -289,15 +289,29 @@ function nav() {
 function tilt() {
   if (reduceMotion || window.matchMedia("(hover: none)").matches) return;
   document.querySelectorAll(".card").forEach((card) => {
+    let frame = 0;
+    let x = 0.5;
+    let y = 0.5;
+    let rect;
+    card.addEventListener("mouseenter", () => { rect = card.getBoundingClientRect(); });
     card.addEventListener("mousemove", (e) => {
-      const r = card.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width;
-      const y = (e.clientY - r.top) / r.height;
-      card.style.setProperty("--mx", `${x * 100}%`);
-      card.style.setProperty("--my", `${y * 100}%`);
-      card.style.transform = `perspective(900px) rotateY(${(x - 0.5) * 10}deg) rotateX(${(0.5 - y) * 10}deg) translateY(-4px)`;
+      if (!rect) return;
+      x = (e.clientX - rect.left) / rect.width;
+      y = (e.clientY - rect.top) / rect.height;
+      if (frame) return;
+      frame = requestAnimationFrame(() => {
+        card.style.setProperty("--mx", `${x * 100}%`);
+        card.style.setProperty("--my", `${y * 100}%`);
+        card.style.transform = `perspective(900px) rotateY(${(x - 0.5) * 10}deg) rotateX(${(0.5 - y) * 10}deg) translateY(-4px)`;
+        frame = 0;
+      });
     });
-    card.addEventListener("mouseleave", () => { card.style.transform = ""; });
+    card.addEventListener("mouseleave", () => {
+      cancelAnimationFrame(frame);
+      frame = 0;
+      rect = null;
+      card.style.transform = "";
+    });
   });
 }
 
