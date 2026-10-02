@@ -27,6 +27,7 @@ function render(data) {
   const name = $("#team-name");
   name.textContent = team.name;
   name.dataset.text = team.name;
+  $("#hero-description").innerHTML = fmt(team.description || "");
   $("#hero-tags").innerHTML = team.tags.map((t) => `<span class="tag">${esc(t)}</span>`).join("");
 
   // about: lore terminal
@@ -300,11 +301,15 @@ function tilt() {
     let x = 0.5;
     let y = 0.5;
     let rect;
-    card.addEventListener("mouseenter", () => { rect = card.getBoundingClientRect(); });
+    // store the card's page position (not viewport position) so scrolling while hovering doesn't skew it
+    card.addEventListener("mouseenter", () => {
+      const r = card.getBoundingClientRect();
+      rect = { left: r.left + window.scrollX, top: r.top + window.scrollY, width: r.width, height: r.height };
+    });
     card.addEventListener("mousemove", (e) => {
       if (!rect) return;
-      x = (e.clientX - rect.left) / rect.width;
-      y = (e.clientY - rect.top) / rect.height;
+      x = (e.pageX - rect.left) / rect.width;
+      y = (e.pageY - rect.top) / rect.height;
       if (frame) return;
       frame = requestAnimationFrame(() => {
         card.style.setProperty("--mx", `${x * 100}%`);

@@ -755,7 +755,10 @@ a { color: inherit; text-decoration: none; }
   color: var(--cyan);
   border: 1px solid var(--cyan);
 }
+/* "highlight" values in data.json: gold, silver, bronze, origin */
 .place.gold { color: var(--amber); border-color: var(--amber); box-shadow: 0 0 10px rgba(255, 184, 0, .4); }
+.place.silver { color: #dfe6ee; border-color: #c0c9d4; box-shadow: 0 0 10px rgba(192, 201, 212, .4); }
+.place.bronze { color: #e8a26a; border-color: #cd7f32; box-shadow: 0 0 10px rgba(205, 127, 50, .45); }
 .place.origin { color: var(--magenta); border-color: var(--magenta); }
 
 /* =========================================================

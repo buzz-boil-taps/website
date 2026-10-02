@@ -6,8 +6,9 @@
       "we break things (responsibly).",
       "we ship at hackathons.",
       "we read assembly for fun.",
-      "we do random stuff we find interesting"
+      "we do random stuff we find interesting."
     ],
+    "description": "Three students. One oddly named team. Security research, CTFs, and whatever we decide to build next.",
     "tags": ["CTF", "HACKATHONS", "VULN RESEARCH", "ENGINEERING"],
     "origin": [
       "It was our first CTF together. The organizers had a random name generator. They *rolled the dice*.",
@@ -34,7 +35,7 @@
       "accent": "lime",
       "role": "pwn / web exploitation / cloud exploitation / code guy",
       "bio": "You built it? I *break* it. You fixed it? *\"You sure? :)\"*. Other than that, I love python and can read (a tad bit) of assembly. I also like to build things and love AI stuff.",
-      "skills": ["python", "Assembly", "C", "Web Exploitation", "Cloud Exploitation", "AI", "Wireshark", "Burp Suite", "PCB Design"],
+      "skills": ["Python", "Assembly", "C", "Web Exploitation", "Cloud Exploitation", "AI", "Wireshark", "Burp Suite", "PCB Design"],
       "website": { "label": "darsh.singhals.org", "url": "https://darsh.singhals.org" },
       "github": { "label": "@darsh-io", "url": "https://github.com/darsh-io" },
       "email": "darsh@singhals.org"
@@ -47,7 +48,7 @@
       "role": "web exploitation / pwn / CAD & PCB / spaghetti breadboard wiring guy",
       "bio": "You want a PCB? Sure! By tomorrow? You want a case and wired perfboard too? Uhhh bye. I love engineering, coding, IO! and cybersec but i have no time management skills. Please dont AI your PCBs.",
       "skills": ["C++", "Assembly", "Python", "CAD", "PCB Design", "Web Exploitation", "Pwn"],
-      "website": { "label": "zhengxian.org/", "url": "https://zhengxian.org/" },
+      "website": { "label": "zhengxian.org", "url": "https://zhengxian.org/" },
       "github": { "label": "@nzx37", "url": "https://github.com/nzx37" },
       "email": "ng@zhengxian.org"
     },
@@ -58,7 +59,7 @@
       "accent": "magenta",
       "role": "forensics / MA + RE / Insanity generator / math guy",
       "bio": "Give me a suspicious file and I'll probably open it before asking where it came from. I'm into forensics, malware analysis, and reverse engineering—figuring out what happened and what the code is hiding. Outside CTFs, I build web projects, get distracted by maths, and start more side projects than I can finish.",
-      "skills": ["forensics", "Malware Analysis", "Reverse Engineering", "Python", "C++", "Web Exploitation", "AI", "Wireshark", "Sentinel Programme"],
+      "skills": ["Forensics", "Malware Analysis", "Reverse Engineering", "Python", "C++", "Web Exploitation", "AI", "Wireshark", "Sentinel Programme"],
       "website": { "label": "lxysg.com", "url": "https://lxysg.com" },
       "github": { "label": "@ahigherdesire", "url": "https://github.com/ahigherdesire" },
       "email": "xy@lxysg.com"
@@ -72,7 +73,7 @@
       "title": "First Vulnerability Disclosure to [REDACTED] via SingCERT",
       "place": "First Vulnerability Disclosure",
       "highlight": "gold",
-      "description": "We disclosed a vulnerability to [REDACTED] via SingCERT. The vendor patched it upstream and are currently working with them for disclosure / recognition. We are the first (at least ONE of the first) to disclose a vulnerability to them via SingCERT."
+      "description": "We disclosed a vulnerability to [REDACTED] via SingCERT. The vendor patched it upstream and we are currently working with them for disclosure / recognition. We are the first (at least ONE of the first) to disclose a vulnerability to them via SingCERT."
     },
     {
       "date": "2026-07-10 to 2026-07-19",
@@ -86,8 +87,8 @@
       "type": "hackathon",
       "title": "NUSHHACK 25'",
       "place": "#3",
-      "highlight": "First Group Challenge!",
-      "description": "A really cool 24-hour hackathon! Also our very first time competing as a three people on one team(wow we were babies back then)"
+      "highlight": "bronze",
+      "description": "A really cool 24-hour hackathon! Also our very first time competing as three people on one team (wow we were babies back then)"
     }
   ]
 }
