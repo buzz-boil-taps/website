@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buzz Boil Taps // CTF &amp; Hacking Crew</title>
+  <meta name="description" content="Buzz Boil Taps — three students who play CTFs, build at hackathons, and break things for fun.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='10' fill='%2307070d'/><text x='50%25' y='58%25' text-anchor='middle' font-family='monospace' font-weight='700' font-size='26' fill='%2300f0ff'>BBT</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ============ BOOT SEQUENCE ============ -->
+  <div id="boot" aria-hidden="true">
+    <pre id="boot-log"></pre>
+    <span class="boot-skip">[ press any key to skip ]</span>
+  </div>
+
+  <!-- ============ BACKGROUND FX ============ -->
+  <canvas id="rain" aria-hidden="true"></canvas>
+  <div class="grid-floor" aria-hidden="true"></div>
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav">
+    <a href="#top" class="nav-logo" aria-label="Buzz Boil Taps home">
+      <span class="prompt">root@bbt</span><span class="dim">:~$</span><span class="cursor">_</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav-links">
+      <a href="#about"><span class="num">01.</span>about</a>
+      <a href="#crew"><span class="num">02.</span>crew</a>
+      <a href="#pwned"><span class="num">03.</span>achievements</a>
+      <a href="#connect"><span class="num">04.</span>connect</a>
+    </nav>
+  </header>
+
+  <main id="top">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <div class="hero-inner">
+        <p class="hero-pre"><span class="neon-m">&gt;</span> initializing team profile<span class="dots"></span></p>
+
+        <h1 class="glitch" data-text="BUZZ BOIL TAPS">BUZZ BOIL TAPS</h1>
+
+        <p class="hero-sub">
+          <span class="dim">$</span> <span id="typed"></span><span class="cursor">█</span>
+        </p>
+
+        <div class="hero-tags">
+          <span class="tag">CTF</span>
+          <span class="tag">HACKATHONS</span>
+          <span class="tag">VULN RESEARCH</span>
+          <span class="tag">ENGINEERING</span>
+        </div>
+
+        <div class="hero-cta">
+          <a href="#crew" class="btn btn-primary">./meet_the_crew</a>
+          <a href="#pwned" class="btn btn-ghost">cat achievements.log</a>
+        </div>
+      </div>
+
+      <a href="#about" class="scroll-hint" aria-label="Scroll down">
+        <span>scroll</span>
+        <span class="arrow">▼</span>
+      </a>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section id="about" class="section">
+      <h2 class="section-title" data-num="01"><span class="neon-c">//</span> about</h2>
+
+      <div class="about-grid">
+        <div class="term reveal">
+          <div class="term-bar">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+            <span class="term-title">bbt@origin: ~/lore</span>
+          </div>
+          <div class="term-body">
+            <p><span class="neon-c">bbt@origin</span>:<span class="neon-m">~/lore</span>$ cat origin_story.txt</p>
+            <p class="out">
+              It was our first CTF together. The registration form wanted a team name.
+              Nobody had one. Someone hit the <span class="hl">random generator</span>.
+            </p>
+            <p class="out">
+              Out came <span class="hl">"Buzz Boil Taps"</span>. Meaningless. Perfect.
+              We kept it, and it stuck with us through every CTF since.
+            </p>
+            <p><span class="neon-c">bbt@origin</span>:<span class="neon-m">~/lore</span>$ cat mission.txt</p>
+            <p class="out">
+              We're <span class="hl">three students</span> from the same school, same class,
+              who'd rather be reversing a binary than doing homework. We play CTFs, ship things
+              at hackathons, dig for bugs, and build hardware that sometimes works on the first try.
+            </p>
+            <p><span class="neon-c">bbt@origin</span>:<span class="neon-m">~/lore</span>$ <span class="cursor">█</span></p>
+          </div>
+        </div>
+
+        <!-- PLACEHOLDER: update these numbers -->
+        <div class="stats reveal">
+          <div class="stat">
+            <span class="stat-num" data-count="3">0</span>
+            <span class="stat-label">operators</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num" data-count="12" data-suffix="+">0</span>
+            <span class="stat-label">CTFs played</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num" data-count="150" data-suffix="+">0</span>
+            <span class="stat-label">flags captured</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num" data-count="4">0</span>
+            <span class="stat-label">hackathons</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CREW ============ -->
+    <section id="crew" class="section">
+      <h2 class="section-title" data-num="02"><span class="neon-c">//</span> the crew</h2>
+      <p class="section-sub"><span class="dim">$</span> ls -la ./members <span class="dim"># 3 entries</span></p>
+
+      <div class="crew-grid">
+
+        <!-- ===== MEMBER 1 (PLACEHOLDER) ===== -->
+        <article class="card reveal" data-accent="cyan">
+          <div class="card-glow"></div>
+          <div class="card-head">
+            <div class="avatar"><span>M1</span></div>
+            <div>
+              <h3 class="card-name">Member One</h3>
+              <p class="card-handle">@handle_one</p>
+            </div>
+          </div>
+          <p class="card-role"><span class="dim">role:</span> pwn / reverse engineering</p>
+          <p class="card-bio">Placeholder bio. Lives in GDB, dreams in assembly. Will happily spend six hours on one heap challenge.</p>
+          <ul class="skills">
+            <li>pwn</li><li>rev</li><li>C</li><li>x86-64</li>
+          </ul>
+          <div class="card-links">
+            <a href="#" aria-label="Member One's website">web</a>
+            <a href="#" aria-label="Member One's GitHub">github</a>
+            <a href="mailto:member1@example.com" aria-label="Email Member One">email</a>
+          </div>
+        </article>
+
+        <!-- ===== MEMBER 2 (PLACEHOLDER) ===== -->
+        <article class="card reveal" data-accent="magenta">
+          <div class="card-glow"></div>
+          <div class="card-head">
+            <div class="avatar"><span>M2</span></div>
+            <div>
+              <h3 class="card-name">Member Two</h3>
+              <p class="card-handle">@handle_two</p>
+            </div>
+          </div>
+          <p class="card-role"><span class="dim">role:</span> web exploitation / crypto</p>
+          <p class="card-bio">Placeholder bio. Finds the one input field nobody sanitized. Thinks every problem is secretly an XOR.</p>
+          <ul class="skills">
+            <li>web</li><li>crypto</li><li>Python</li><li>Burp</li>
+          </ul>
+          <div class="card-links">
+            <a href="#" aria-label="Member Two's website">web</a>
+            <a href="#" aria-label="Member Two's GitHub">github</a>
+            <a href="mailto:member2@example.com" aria-label="Email Member Two">email</a>
+          </div>
+        </article>
+
+        <!-- ===== MEMBER 3 (PLACEHOLDER) ===== -->
+        <article class="card reveal" data-accent="lime">
+          <div class="card-glow"></div>
+          <div class="card-head">
+            <div class="avatar"><span>M3</span></div>
+            <div>
+              <h3 class="card-name">Member Three</h3>
+              <p class="card-handle">@handle_three</p>
+            </div>
+          </div>
+          <p class="card-role"><span class="dim">role:</span> forensics / hardware</p>
+          <p class="card-bio">Placeholder bio. Owns more microcontrollers than socks. Can recover a deleted file from a PCAP and a prayer.</p>
+          <ul class="skills">
+            <li>forensics</li><li>hardware</li><li>OSINT</li><li>Rust</li>
+          </ul>
+          <div class="card-links">
+            <a href="#" aria-label="Member Three's website">web</a>
+            <a href="#" aria-label="Member Three's GitHub">github</a>
+            <a href="mailto:member3@example.com" aria-label="Email Member Three">email</a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ============ ACHIEVEMENTS ============ -->
+    <section id="pwned" class="section">
+      <h2 class="section-title" data-num="03"><span class="neon-c">//</span> achievements</h2>
+      <p class="section-sub"><span class="dim">$</span> tail -f achievements.log | grep --filter=<span id="filter-label" class="neon-m">all</span></p>
+
+      <div class="filters" role="tablist" aria-label="Filter achievements">
+        <button class="filter active" data-filter="all" role="tab" aria-selected="true">all</button>
+        <button class="filter" data-filter="ctf" role="tab" aria-selected="false">ctf</button>
+        <button class="filter" data-filter="hackathon" role="tab" aria-selected="false">hackathon</button>
+        <button class="filter" data-filter="research" role="tab" aria-selected="false">research</button>
+      </div>
+
+      <!-- PLACEHOLDER entries: replace with your real results -->
+      <ol class="timeline">
+        <li class="entry reveal" data-type="ctf">
+          <span class="entry-date">2026-09</span>
+          <div class="entry-body">
+            <span class="badge ctf">CTF</span>
+            <h3>Placeholder CTF 2026 <span class="place gold">#3</span></h3>
+            <p>Top 3 out of 400+ teams. Full-cleared the pwn category.</p>
+          </div>
+        </li>
+        <li class="entry reveal" data-type="hackathon">
+          <span class="entry-date">2026-07</span>
+          <div class="entry-body">
+            <span class="badge hackathon">HACKATHON</span>
+            <h3>Placeholder Hackathon <span class="place">Winner</span></h3>
+            <p>Built a thing in 24 hours on zero sleep. Judges liked it.</p>
+          </div>
+        </li>
+        <li class="entry reveal" data-type="research">
+          <span class="entry-date">2026-05</span>
+          <div class="entry-body">
+            <span class="badge research">RESEARCH</span>
+            <h3>Placeholder Vulnerability Disclosure</h3>
+            <p>Responsibly disclosed a bug in an open-source project. Patched upstream.</p>
+          </div>
+        </li>
+        <li class="entry reveal" data-type="ctf">
+          <span class="entry-date">2026-03</span>
+          <div class="entry-body">
+            <span class="badge ctf">CTF</span>
+            <h3>Placeholder Student CTF <span class="place">#7</span></h3>
+            <p>Top 10 in the student bracket. First blood on a crypto challenge.</p>
+          </div>
+        </li>
+        <li class="entry reveal" data-type="ctf">
+          <span class="entry-date">20XX-XX</span>
+          <div class="entry-body">
+            <span class="badge ctf">CTF</span>
+            <h3>Our First CTF <span class="place origin">origin</span></h3>
+            <p>Where the random name generator blessed us with "Buzz Boil Taps". Everything started here.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ============ CONNECT ============ -->
+    <section id="connect" class="section">
+      <h2 class="section-title" data-num="04"><span class="neon-c">//</span> connect</h2>
+      <p class="section-sub">Find us on the internet. Or type <span class="neon-m">help</span> below.</p>
+
+      <div class="connect-grid">
+        <!-- PLACEHOLDER: replace URLs and emails -->
+        <div class="links-table reveal">
+          <div class="lt-row lt-head">
+            <span>operator</span><span>website</span><span>github</span><span>email</span>
+          </div>
+          <div class="lt-row" data-accent="cyan">
+            <span class="op">Member One</span>
+            <a href="#">member1.dev</a>
+            <a href="#">@handle_one</a>
+            <a href="mailto:member1@example.com">member1@example.com</a>
+          </div>
+          <div class="lt-row" data-accent="magenta">
+            <span class="op">Member Two</span>
+            <a href="#">member2.dev</a>
+            <a href="#">@handle_two</a>
+            <a href="mailto:member2@example.com">member2@example.com</a>
+          </div>
+          <div class="lt-row" data-accent="lime">
+            <span class="op">Member Three</span>
+            <a href="#">member3.dev</a>
+            <a href="#">@handle_three</a>
+            <a href="mailto:member3@example.com">member3@example.com</a>
+          </div>
+        </div>
+
+        <!-- Interactive terminal -->
+        <div class="term shell reveal">
+          <div class="term-bar">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+            <span class="term-title">guest@buzzboiltaps: ~</span>
+          </div>
+          <div class="term-body" id="shell-out">
+            <p class="out">Welcome to the BBT shell. Type <span class="hl">help</span> to list commands.</p>
+          </div>
+          <form class="shell-input" id="shell-form" autocomplete="off">
+            <label for="shell-cmd"><span class="neon-c">guest@bbt</span>:<span class="neon-m">~</span>$</label>
+            <input id="shell-cmd" type="text" spellcheck="false" aria-label="Terminal command">
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p><span class="neon-c">BUZZ BOIL TAPS</span> <span class="dim">// est. by random name generator</span></p>
+    <p class="dim">&copy; <span id="year"></span> — hack the planet (legally)</p>
+    <!-- psst: there's a flag hidden on this page -->
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
