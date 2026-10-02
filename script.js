@@ -55,9 +55,10 @@ function render(data) {
   $("#member-count").textContent = members.length;
   $("#crew-grid").innerHTML = members
     .map(
-      (m) => `
+      (m, i) => `
       <article class="card reveal" data-accent="${esc(m.accent)}">
         <div class="card-glow"></div>
+        <span class="card-id" aria-hidden="true">OP_${String(i + 1).padStart(2, "0")} // 0x${(0xb7 + i * 0x1f).toString(16).toUpperCase()}</span>
         <div class="card-head">
           <div class="avatar"><span>${esc(m.initials)}</span></div>
           <div>
@@ -118,6 +119,29 @@ function render(data) {
       )
       .join("")
   );
+
+  // scrolling tapes: inserted after the section named in "after".
+  // each track holds two identical halves so the loop is seamless.
+  (data.tapes || []).forEach((tape, i) => {
+    const anchor = document.getElementById(tape.after);
+    if (!anchor || !tape.items?.length) return;
+    const items = tape.items.map((t) => `<span>${esc(t)}</span><span class="tape-sep">///</span>`).join("");
+    const half = `<div class="tape-half">${items.repeat(3)}</div>`;
+    anchor.insertAdjacentHTML(
+      "afterend",
+      `<div class="tape${i % 2 ? " flip" : ""}" data-color="${esc(tape.color || "amber")}" aria-hidden="true"><div class="tape-track">${half}${half}</div></div>`
+    );
+  });
+
+  // hero stamp + status line + HUD side text
+  const hud = data.hud || {};
+  const stamp = $("#hero-stamp");
+  stamp.textContent = hud.stamp || "";
+  stamp.hidden = !hud.stamp;
+  $("#hero-meta").innerHTML = [{ label: "MEMBERS", value: String(members.length).padStart(2, "0") }, ...(hud.status || [])]
+    .map((s) => `<span>${esc(s.label)}: <b>${esc(s.value)}</b></span>`)
+    .join("");
+  $("#hud-side").textContent = hud.side || "";
 
   // footer
   $("#footer-name").textContent = team.name;
@@ -437,6 +461,89 @@ function shell(data) {
   $(".shell").addEventListener("click", () => input.focus());
 }
 
+/* ---------- HUD: clock + scroll progress ---------- */
+function hud() {
+  const clock = $("#hud-clock");
+  const pct = $("#hud-pct");
+  const bar = $(".progress");
+  const pad = (n) => String(n).padStart(2, "0");
+
+  const tick = () => {
+    const d = new Date();
+    clock.textContent = `${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+  };
+  tick();
+  setInterval(tick, 1000);
+
+  let queued = false;
+  const onScroll = () => {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(() => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const p = max > 0 ? Math.min(window.scrollY / max, 1) : 0;
+      bar.style.transform = `scaleX(${p})`;
+      pct.textContent = String(Math.round(p * 100)).padStart(3, "0");
+      queued = false;
+    });
+  };
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+}
+
+/* ---------- section titles decrypt when they scroll into view ---------- */
+function scrambleTitles() {
+  if (reduceMotion) return;
+  const glyphs = "!<>-_\\/[]{}=+*^?#$%&@01";
+
+  const scramble = (node) => {
+    const final = node.textContent;
+    const start = performance.now();
+    const dur = 650;
+    const step = (now) => {
+      const t = Math.min((now - start) / dur, 1);
+      const locked = Math.floor(final.length * t);
+      node.textContent = [...final]
+        .map((ch, i) => (i < locked || ch === " " ? ch : glyphs[(Math.random() * glyphs.length) | 0]))
+        .join("");
+      if (t < 1) requestAnimationFrame(step);
+      else node.textContent = final;
+    };
+    requestAnimationFrame(step);
+  };
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      const text = [...e.target.childNodes].reverse().find((n) => n.nodeType === Node.TEXT_NODE && n.textContent.trim());
+      if (text) scramble(text);
+      io.unobserve(e.target);
+    });
+  }, { threshold: 0.6 });
+  document.querySelectorAll(".section-title").forEach((el) => io.observe(el));
+}
+
+/* ---------- random glitch bursts: title often, whole screen rarely ---------- */
+function glitchBursts() {
+  if (reduceMotion) return;
+  const title = $("#team-name");
+
+  const burst = (el, cls, ms) => {
+    el.classList.add(cls);
+    setTimeout(() => el.classList.remove(cls), ms);
+  };
+  const schedule = (fn, min, max) => {
+    const run = () => {
+      if (!document.hidden) fn();
+      setTimeout(run, min + Math.random() * (max - min));
+    };
+    setTimeout(run, min + Math.random() * (max - min));
+  };
+
+  schedule(() => burst(title, "burst", 320), 2500, 6000);
+  schedule(() => burst(document.body, "sys-glitch", 180), 9000, 16000);
+}
+
 /* =========================================================
    BOOTSTRAP
    ========================================================= */
@@ -456,6 +563,7 @@ function showLoadError(err) {
 (async function main() {
   rain();
   nav();
+  hud();
 
   let data;
   try {
@@ -474,6 +582,8 @@ function showLoadError(err) {
   tilt();
   filters();
   shell(data);
+  scrambleTitles();
+  glitchBursts();
 })();
 
 console.log(

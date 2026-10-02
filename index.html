@@ -30,6 +30,17 @@
   <div class="grid-floor" aria-hidden="true"></div>
   <div class="scanlines" aria-hidden="true"></div>
   <div class="vignette" aria-hidden="true"></div>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="progress" aria-hidden="true"></div>
+
+  <!-- ============ HUD FRAME ============ -->
+  <div class="hud" aria-hidden="true">
+    <span class="hud-corner tl"></span><span class="hud-corner tr"></span>
+    <span class="hud-corner bl"></span><span class="hud-corner br"></span>
+    <span class="hud-side" id="hud-side"></span>
+    <span class="hud-readout"><span id="hud-clock">--:--:--</span> <span class="hud-sig">SIG ▮▮▮▮▯</span></span>
+    <span class="hud-scroll">SCROLL <span id="hud-pct">000</span>%</span>
+  </div>
 
   <!-- ============ NAV ============ -->
   <header class="nav">
@@ -52,8 +63,10 @@
   <main id="top">
 
     <!-- ============ HERO ============ -->
-    <section class="hero">
+    <section class="hero" id="hero">
       <div class="hero-inner">
+        <span class="hero-stamp" id="hero-stamp" aria-hidden="true" hidden></span>
+        <p class="hero-meta" id="hero-meta" aria-hidden="true"></p>
         <p class="hero-pre"><span class="neon-m">&gt;</span> initializing team profile<span class="dots"></span></p>
 
         <h1 class="glitch" id="team-name"></h1>

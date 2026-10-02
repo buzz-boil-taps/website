@@ -8,7 +8,7 @@
       "we read assembly for fun.",
       "we do random stuff we find interesting."
     ],
-    "description": "Three students. One oddly named team. Security research, CTFs, and whatever we decide to build next.",
+    "description": "Three students. One oddly named team. Security research, CTFs, Hackathons, and whatever we decide to build next.",
     "tags": ["CTF", "HACKATHONS", "VULN RESEARCH", "ENGINEERING"],
     "origin": [
       "It was our first CTF together. The organizers had a random name generator. They *rolled the dice*.",
@@ -19,6 +19,28 @@
     ],
     "footer": "hack the planet (legally)"
   },
+
+  "hud": {
+    "stamp": "EST. BY RNG",
+    "status": [
+      { "label": "STATUS", "value": "BUILDING" },
+      { "label": "FOCUS", "value": "CTF · HARDWARE · CODE" }
+    ],
+    "side": "BBT // BUILD · BREAK · REPEAT"
+  },
+
+  "tapes": [
+    {
+      "after": "hero",
+      "color": "amber",
+      "items": ["CTFs", "HACKATHONS", "PCB DESIGN", "VULN RESEARCH", "CAD", "BUILD / BREAK / REPEAT"]
+    },
+    {
+      "after": "crew",
+      "color": "magenta",
+      "items": ["I <3 SOLDER FUMES", "IT WORKED ON THE BREADBOARD", "ONE MORE SIDE PROJECT", "BUZZ BOIL TAPS", "WHAT IF WE DID [INSERT INSANITY HERE]"]
+    }
+  ],
 
   "stats": [
     { "value": 3, "suffix": "", "label": "people" },
@@ -35,7 +57,7 @@
       "accent": "lime",
       "role": "pwn / web exploitation / cloud exploitation / code guy",
       "bio": "You built it? I *break* it. You fixed it? *\"You sure? :)\"*. Other than that, I love python and can read (a tad bit) of assembly. I also like to build things and love AI stuff.",
-      "skills": ["Python", "Assembly", "C", "Web Exploitation", "Cloud Exploitation", "AI", "Wireshark", "Burp Suite", "PCB Design"],
+      "skills": ["Python", "Assembly", "C", "AI", "Web Exploitation", "Cloud Exploitation", "Wireshark", "Burp Suite", "PCB Design"],
       "website": { "label": "darsh.singhals.org", "url": "https://darsh.singhals.org" },
       "github": { "label": "@darsh-io", "url": "https://github.com/darsh-io" },
       "email": "darsh@singhals.org"
@@ -73,14 +95,14 @@
       "title": "First Vulnerability Disclosure to [REDACTED] via SingCERT",
       "place": "First Vulnerability Disclosure",
       "highlight": "gold",
-      "description": "We disclosed a vulnerability to [REDACTED] via SingCERT. The vendor patched it upstream and we are currently working with them for disclosure / recognition. We are the first (at least ONE of the first) to disclose a vulnerability to them via SingCERT."
+      "description": "We disclosed our first vulnerability to [REDACTED] via SingCERT! The vendor patched it upstream and we are currently working with them for disclosure / recognition. We are the first (at least ONE of the first) to disclose a vulnerability to them via SingCERT!"
     },
     {
       "date": "2026-07-10 to 2026-07-19",
       "type": "ctf",
       "title": "Intermediate Youth Cyber Exploration Programme CTF",
       "place": "#11",
-      "description": "Our first group CTF as well as exposure to a lot of skillsets for cybersecurity(fun fact this is where we got our name!)"
+      "description": "Our first group CTF as well as exposure to a lot of skillsets for cybersecurity (fun fact this is where we got our name!)"
     },
     {
       "date": "2025-11-11 to 2025-11-12",
