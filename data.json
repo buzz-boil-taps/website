@@ -75,13 +75,6 @@
       "description": "We disclosed a vulnerability to [REDACTED] via SingCERT. The vendor patched it upstream and are currently working with them for disclosure / recognition. We are the first (at least ONE of the first) to disclose a vulnerability to them via SingCERT."
     },
     {
-      "date": "2026-07",
-      "type": "hackathon",
-      "title": "Placeholder Hackathon",
-      "place": "Winner",
-      "description": "Built a thing in 24 hours on zero sleep. Judges liked it."
-    },
-    {
       "date": "2026-05",
       "type": "research",
       "title": "Placeholder Vulnerability Disclosure",
