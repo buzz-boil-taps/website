@@ -1,13 +1,136 @@
 /* =========================================================
-   BUZZ BOIL TAPS — interactions
+   BUZZ BOIL TAPS — renders data.json + interactions
    ========================================================= */
 
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const $ = (sel) => document.querySelector(sel);
+
+/* ---------- helpers ---------- */
+const esc = (s = "") =>
+  String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+// escape, then turn *text* into a highlighted span
+const fmt = (s) => esc(s).replace(/\*(.+?)\*/g, '<span class="hl">$1</span>');
+
+// block javascript: and other odd schemes in links from data.json
+const safeUrl = (u = "#") => (/^(https?:|mailto:|#|\/|\.)/i.test(u) ? u : "#");
+
+const ACCENT_CLASS = { cyan: "neon-c", magenta: "neon-m", lime: "hl" };
+
+/* =========================================================
+   RENDER
+   ========================================================= */
+function render(data) {
+  const { team, stats, members, achievements } = data;
+
+  // hero
+  const name = $("#team-name");
+  name.textContent = team.name;
+  name.dataset.text = team.name;
+  $("#hero-tags").innerHTML = team.tags.map((t) => `<span class="tag">${esc(t)}</span>`).join("");
+
+  // about: lore terminal
+  const prompt = (file) =>
+    `<p><span class="neon-c">bbt@origin</span>:<span class="neon-m">~/lore</span>$ ${file}</p>`;
+  $("#lore").innerHTML =
+    prompt("cat origin_story.txt") +
+    team.origin.map((p) => `<p class="out">${fmt(p)}</p>`).join("") +
+    prompt("cat mission.txt") +
+    team.mission.map((p) => `<p class="out">${fmt(p)}</p>`).join("") +
+    prompt('<span class="cursor">█</span>');
+
+  // about: stats
+  $("#stats").innerHTML = stats
+    .map(
+      (s) => `
+      <div class="stat">
+        <span class="stat-num" data-count="${+s.value || 0}" data-suffix="${esc(s.suffix)}">0</span>
+        <span class="stat-label">${esc(s.label)}</span>
+      </div>`
+    )
+    .join("");
+
+  // crew cards
+  $("#member-count").textContent = members.length;
+  $("#crew-grid").innerHTML = members
+    .map(
+      (m) => `
+      <article class="card reveal" data-accent="${esc(m.accent)}">
+        <div class="card-glow"></div>
+        <div class="card-head">
+          <div class="avatar"><span>${esc(m.initials)}</span></div>
+          <div>
+            <h3 class="card-name">${esc(m.name)}</h3>
+            <p class="card-handle">${esc(m.handle)}</p>
+          </div>
+        </div>
+        <p class="card-role"><span class="dim">role:</span> ${esc(m.role)}</p>
+        <p class="card-bio">${fmt(m.bio)}</p>
+        <ul class="skills">${m.skills.map((s) => `<li>${esc(s)}</li>`).join("")}</ul>
+        <div class="card-links">
+          <a href="${esc(safeUrl(m.website?.url))}" target="_blank" rel="noopener" aria-label="${esc(m.name)}'s website">web</a>
+          <a href="${esc(safeUrl(m.github?.url))}" target="_blank" rel="noopener" aria-label="${esc(m.name)}'s GitHub">github</a>
+          <a href="mailto:${esc(m.email)}" aria-label="Email ${esc(m.name)}">email</a>
+        </div>
+      </article>`
+    )
+    .join("");
+
+  // achievement filters: "all" + every type that appears in the data
+  const types = ["all", ...new Set(achievements.map((a) => a.type))];
+  $("#filters").innerHTML = types
+    .map(
+      (t, i) =>
+        `<button class="filter${i === 0 ? " active" : ""}" data-filter="${esc(t)}" role="tab" aria-selected="${i === 0}">${esc(t)}</button>`
+    )
+    .join("");
+
+  // achievement timeline
+  $("#timeline").innerHTML = achievements
+    .map(
+      (a) => `
+      <li class="entry reveal" data-type="${esc(a.type)}">
+        <span class="entry-date">${esc(a.date)}</span>
+        <div class="entry-body">
+          <span class="badge ${esc(a.type)}">${esc(a.type.toUpperCase())}</span>
+          <h3>${esc(a.title)}${a.place ? ` <span class="place ${esc(a.highlight || "")}">${esc(a.place)}</span>` : ""}</h3>
+          <p>${fmt(a.description)}</p>
+        </div>
+      </li>`
+    )
+    .join("");
+
+  // connect table
+  $("#links-table").insertAdjacentHTML(
+    "beforeend",
+    members
+      .map(
+        (m) => `
+      <div class="lt-row" data-accent="${esc(m.accent)}">
+        <span class="op">${esc(m.name)}</span>
+        <a href="${esc(safeUrl(m.website?.url))}" target="_blank" rel="noopener">${esc(m.website?.label)}</a>
+        <a href="${esc(safeUrl(m.github?.url))}" target="_blank" rel="noopener">${esc(m.github?.label)}</a>
+        <a href="mailto:${esc(m.email)}">${esc(m.email)}</a>
+      </div>`
+      )
+      .join("")
+  );
+
+  // footer
+  $("#footer-name").textContent = team.name;
+  $("#footer-text").textContent = team.footer;
+  $("#year").textContent = new Date().getFullYear();
+}
+
+/* =========================================================
+   INTERACTIONS
+   ========================================================= */
 
 /* ---------- boot sequence ---------- */
-(function boot() {
-  const el = document.getElementById("boot");
-  const log = document.getElementById("boot-log");
+function boot(teamName) {
+  const el = $("#boot");
+  if (!el) return;
+  const log = $("#boot-log");
 
   // only play once per browser session
   let seen = false;
@@ -20,8 +143,8 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").match
     "[    0.133700] <span class='ok'>[ OK ]</span> loaded module: caffeine.ko",
     "[    0.271828] <span class='warn'>[WARN]</span> sleep_schedule.service not found",
     "[    0.314159] <span class='ok'>[ OK ]</span> started gdb, ghidra, burpsuite",
-    "[    0.420000] <span class='ok'>[ OK ]</span> 3/3 operators online",
-    "[    0.500000] generating team name... <span class='big'>BUZZ BOIL TAPS</span>",
+    "[    0.420000] <span class='ok'>[ OK ]</span> all operators online",
+    `[    0.500000] generating team name... <span class='big'>${esc(teamName)}</span>`,
     "",
     "access granted_",
   ];
@@ -44,11 +167,11 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").match
   window.addEventListener("keydown", finish);
   el.addEventListener("click", finish);
   next();
-})();
+}
 
 /* ---------- code rain background ---------- */
-(function rain() {
-  const canvas = document.getElementById("rain");
+function rain() {
+  const canvas = $("#rain");
   const ctx = canvas.getContext("2d");
   const chars = "01アイウエオカキクケコサシスセソ<>/{}[]$#@&*BUZZBOILTAPS".split("");
   const size = 16;
@@ -84,19 +207,13 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").match
     requestAnimationFrame(loop);
   };
   requestAnimationFrame(loop);
-})();
+}
 
 /* ---------- typed hero tagline ---------- */
-(function typed() {
-  const el = document.getElementById("typed");
-  const phrases = [
-    "we capture flags.",
-    "we break things (responsibly).",
-    "we ship at hackathons.",
-    "we read assembly for fun.",
-    "three students. one terminal.",
-  ];
-  if (reduceMotion) { el.textContent = phrases[4]; return; }
+function typed(phrases) {
+  const el = $("#typed");
+  if (!phrases.length) return;
+  if (reduceMotion) { el.textContent = phrases[phrases.length - 1]; return; }
 
   let p = 0, c = 0, deleting = false;
   const tick = () => {
@@ -108,10 +225,10 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").match
     else { deleting = false; p = (p + 1) % phrases.length; setTimeout(tick, 350); }
   };
   setTimeout(tick, 600);
-})();
+}
 
 /* ---------- reveal on scroll + stat counters ---------- */
-(function reveal() {
+function reveal() {
   const countUp = (el) => {
     const target = +el.dataset.count;
     const suffix = el.dataset.suffix || "";
@@ -140,12 +257,12 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").match
     el.style.transitionDelay = `${(i % 3) * 90}ms`;
     io.observe(el);
   });
-})();
+}
 
 /* ---------- nav: mobile toggle + active section ---------- */
-(function nav() {
-  const toggle = document.querySelector(".nav-toggle");
-  const links = document.querySelector(".nav-links");
+function nav() {
+  const toggle = $(".nav-toggle");
+  const links = $(".nav-links");
   toggle.addEventListener("click", () => {
     const open = links.classList.toggle("open");
     toggle.setAttribute("aria-expanded", open);
@@ -166,10 +283,10 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").match
     });
   }, { rootMargin: "-45% 0px -50% 0px" });
   map.forEach((_, id) => io.observe(document.getElementById(id)));
-})();
+}
 
 /* ---------- crew cards: 3D tilt + cursor glow ---------- */
-(function tilt() {
+function tilt() {
   if (reduceMotion || window.matchMedia("(hover: none)").matches) return;
   document.querySelectorAll(".card").forEach((card) => {
     card.addEventListener("mousemove", (e) => {
@@ -182,13 +299,13 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").match
     });
     card.addEventListener("mouseleave", () => { card.style.transform = ""; });
   });
-})();
+}
 
 /* ---------- achievement filters ---------- */
-(function filters() {
+function filters() {
   const buttons = document.querySelectorAll(".filter");
   const entries = document.querySelectorAll(".entry");
-  const label = document.getElementById("filter-label");
+  const label = $("#filter-label");
   buttons.forEach((btn) =>
     btn.addEventListener("click", () => {
       const f = btn.dataset.filter;
@@ -204,13 +321,13 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").match
       });
     })
   );
-})();
+}
 
 /* ---------- interactive shell ---------- */
-(function shell() {
-  const out = document.getElementById("shell-out");
-  const form = document.getElementById("shell-form");
-  const input = document.getElementById("shell-cmd");
+function shell(data) {
+  const out = $("#shell-out");
+  const form = $("#shell-form");
+  const input = $("#shell-cmd");
   const history = [];
   let hIdx = 0;
 
@@ -224,7 +341,10 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").match
     out.appendChild(p);
     out.scrollTop = out.scrollHeight;
   };
-  const esc = (s) => s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+  const { members, team } = data;
+  const nameW = Math.max(...members.map((m) => m.name.length)) + 2;
+  const handleW = Math.max(...members.map((m) => m.handle.length)) + 2;
 
   const commands = {
     help: () =>
@@ -238,14 +358,14 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").match
   ...and maybe some hidden ones`,
     whoami: () => "guest. but you could be one of us someday.",
     members: () =>
-      `<span class="neon-c">Member One</span>    @handle_one    pwn / rev
-<span class="neon-m">Member Two</span>    @handle_two    web / crypto
-<span class="hl">Member Three</span>  @handle_three  forensics / hardware`,
-    contact: () =>
-      `member1@example.com
-member2@example.com
-member3@example.com`,
-    origin: () => `first CTF. needed a team name. hit "random". got "Buzz Boil Taps". never looked back.`,
+      members
+        .map(
+          (m) =>
+            `<span class="${ACCENT_CLASS[m.accent] || "neon-c"}">${esc(m.name.padEnd(nameW))}</span>${esc(m.handle.padEnd(handleW))}${esc(m.role)}`
+        )
+        .join("\n"),
+    contact: () => members.map((m) => esc(m.email)).join("\n"),
+    origin: () => team.origin.map(fmt).join("\n"),
     ls: () => "origin_story.txt  mission.txt  members/  achievements.log  flag.txt",
     "cat flag.txt": () => ({ html: "cat: flag.txt: Permission denied", cls: "out err" }),
     "sudo cat flag.txt": () => ({ html: `guest is not in the sudoers file. This incident will be reported.\n...just kidding: <span class="flag">${FLAG}</span>`, cls: "out" }),
@@ -281,11 +401,47 @@ member3@example.com`,
     if (e.key === "ArrowDown") { hIdx = Math.min(hIdx + 1, history.length); input.value = history[hIdx] || ""; }
   });
 
-  document.querySelector(".shell").addEventListener("click", () => input.focus());
-})();
+  $(".shell").addEventListener("click", () => input.focus());
+}
 
-/* ---------- misc ---------- */
-document.getElementById("year").textContent = new Date().getFullYear();
+/* =========================================================
+   BOOTSTRAP
+   ========================================================= */
+function showLoadError(err) {
+  $("#boot")?.remove();
+  const box = $("#load-error");
+  box.hidden = false;
+  box.innerHTML =
+    location.protocol === "file:"
+      ? `<strong>Couldn't load data.json.</strong> Browsers block reading files when a page is opened directly from disk.
+         Run a local server in this folder instead, e.g. <code>python -m http.server</code> then open
+         <code>http://localhost:8000</code> (or use VS Code's Live Server extension).`
+      : `<strong>Couldn't load data.json:</strong> ${esc(err.message)}. Check the file exists and is valid JSON.`;
+  console.error(err);
+}
+
+(async function main() {
+  rain();
+  nav();
+
+  let data;
+  try {
+    const res = await fetch("data.json", { cache: "no-cache" });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    data = await res.json();
+    render(data);
+  } catch (err) {
+    showLoadError(err);
+    return;
+  }
+
+  boot(data.team.name);
+  typed(data.team.taglines);
+  reveal();
+  tilt();
+  filters();
+  shell(data);
+})();
 
 console.log(
   "%cBUZZ BOIL TAPS",

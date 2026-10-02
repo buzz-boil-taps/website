@@ -1,0 +1,106 @@
+{
+  "team": {
+    "name": "BUZZ BOIL TAPS",
+    "taglines": [
+      "we capture flags.",
+      "we break things (responsibly).",
+      "we ship at hackathons.",
+      "we read assembly for fun.",
+      "three students. one terminal."
+    ],
+    "tags": ["CTF", "HACKATHONS", "VULN RESEARCH", "ENGINEERING"],
+    "origin": [
+      "It was our first CTF together. The organizers had a random name generator and forced everyone to be on it. They *rolled the dice*.",
+      "Out came *\"Buzz Boil Taps\"*. Meaningless. Perfect. We kept it, and apparently this is our amazing branding now."
+    ],
+    "mission": [
+      "We're *three students* from the same school, same class, who'd rather be reversing a binary than doing homework. We play CTFs, ship things at hackathons, dig for bugs, and build hardware that sometimes works on the first try (haha, i know, amazing joke there)."
+    ],
+    "footer": "hack the planet (legally)"
+  },
+
+  "stats": [
+    { "value": 3, "suffix": "", "label": "people" },
+    { "value": 2, "suffix": "", "label": "CTFs played" },
+    { "value": 4, "suffix": "+", "label": "vulnerabilities found" },
+    { "value": 2, "suffix": "", "label": "hackathons" }
+  ],
+
+  "members": [
+    {
+      "name": "Darsh Singhal",
+      "handle": "@darsh-io",
+      "initials": "DS",
+      "accent": "lime",
+      "role": "pwn / web exploitation / cloud exploitation / code guy",
+      "bio": "You built it? I *break* it. You fixed it? *\"You sure? :)\"*. Other than that, I love python and can read (a tad bit) of assembly. I also like to build things and love AI stuff.",
+      "skills": ["python", "Assembly", "C", "Web Exploitation", "Cloud Exploitation", "AI", "Wireshark", "Burp Suite", "PCB Design"],
+      "website": { "label": "darsh.singhals.org", "url": "https://darsh.singhals.org" },
+      "github": { "label": "@darsh-io", "url": "https://github.com/darsh-io" },
+      "email": "darsh@singhals.org"
+    },
+    {
+      "name": "Ng Zheng Xian",
+      "handle": "@nzx37",
+      "initials": "NZX",
+      "accent": "cyan",
+      "role": "web exploitation / pwn / spaghetti wire guy (idk u want this or sth else?)",
+      "bio": "<PLEASE FILL IN BIO HERE>",
+      "skills": ["C++", "Assembly", "Python", "CAD", "PCB Design", "Web Exploitation", "Pwn"],
+      "website": { "label": "zhengxian.org/", "url": "https://zhengxian.org/" },
+      "github": { "label": "@nzx37", "url": "https://github.com/nzx37" },
+      "email": "ng@zhengxian.org"
+    },
+    {
+      "name": "Li Xinyuan",
+      "handle": "@ahigherdesire",
+      "initials": "M3",
+      "accent": "magenta",
+      "role": "forensics / MA + RE / Insanity generator / \"claude help me\"",
+      "bio": "<PLEASE FILL IN BIO HERE>",
+      "skills": ["forensics", "Malware Analysis", "Reverse Engineering", "Python", "C++", "Web Exploitation", "AI"],
+      "website": { "label": "lxysg.com", "url": "https://lxysg.com" },
+      "github": { "label": "@ahigherdesire", "url": "https://github.com/ahigherdesire" },
+      "email": "xy@lxysg.com"
+    }
+  ],
+
+  "achievements": [
+    {
+      "date": "2026-09-09",
+      "type": "vulnerability disclosure",
+      "title": "First Vulnerability Disclosure to [REDACTED] via SingCERT",
+      "place": "First Vulnerability Disclosure",
+      "highlight": "gold",
+      "description": "We disclosed a vulnerability to [REDACTED] via SingCERT. The vendor patched it upstream and are currently working with them for disclosure / recognition. We are the first (at least ONE of the first) to disclose a vulnerability to them via SingCERT."
+    },
+    {
+      "date": "2026-07",
+      "type": "hackathon",
+      "title": "Placeholder Hackathon",
+      "place": "Winner",
+      "description": "Built a thing in 24 hours on zero sleep. Judges liked it."
+    },
+    {
+      "date": "2026-05",
+      "type": "research",
+      "title": "Placeholder Vulnerability Disclosure",
+      "description": "Responsibly disclosed a bug in an open-source project. Patched upstream."
+    },
+    {
+      "date": "2026-03",
+      "type": "ctf",
+      "title": "Placeholder Student CTF",
+      "place": "#7",
+      "description": "Top 10 in the student bracket. First blood on a crypto challenge."
+    },
+    {
+      "date": "2026-07-",
+      "type": "ctf",
+      "title": "Our First CTF",
+      "place": "origin",
+      "highlight": "origin",
+      "description": "Where the random name generator blessed us with \"Buzz Boil Taps\". Everything started here."
+    }
+  ]
+}

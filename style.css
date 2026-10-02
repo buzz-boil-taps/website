@@ -802,6 +802,24 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* =========================================================
+   LOAD ERROR (data.json failed)
+   ========================================================= */
+.load-error {
+  position: relative;
+  z-index: 50;
+  max-width: 760px;
+  margin: 6rem auto 0;
+  padding: 1.2rem 1.5rem;
+  font-size: 14px;
+  color: var(--text);
+  background: rgba(255, 59, 92, .08);
+  border: 1px solid var(--red);
+  border-left: 4px solid var(--red);
+}
+.load-error strong { color: var(--red); }
+.load-error code { color: var(--lime); }
+
+/* =========================================================
    FOOTER
    ========================================================= */
 .footer {
