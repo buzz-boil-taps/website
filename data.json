@@ -68,9 +68,9 @@
       "initials": "NZX",
       "accent": "cyan",
       "role": "web exploitation / pwn / CAD & PCB / spaghetti breadboard wiring guy",
-      "bio": "You want a **PCB**? Sure! _By tomorrow?_ You want a case and wired perfboard too? *Uhhh bye.* I love **engineering**, **coding**, **IO!** and **cybersec** but i have _no_ time management skills. **Please dont AI your PCBs.**",
+      "bio": "You want a **PCB**? Sure! _You want it to pass DRC?_ *Uhhh bye.*(Ok DRC is not that bad I luv DRC). I love **engineering**, **coding**, **IO!** and **cybersec** but i have _no_ time management skills. **Please dont AI your PCBs.**",
       "skills": ["C++", "Assembly", "Python", "CAD", "PCB Design", "Web Exploitation", "Pwn"],
-      "website": { "label": "zhengxian.org", "url": "https://zhengxian.org/" },
+      "website": { "label": "ng.zhengxian.org", "url": "https://ng.zhengxian.org/" },
       "github": { "label": "@nzx37", "url": "https://github.com/nzx37" },
       "email": "ng@zhengxian.org"
     },
